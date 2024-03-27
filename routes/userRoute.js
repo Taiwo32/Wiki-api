@@ -21,7 +21,8 @@ router .patch("/updateMe", userController.updateMe);
 router.use(authController.restrictTo('admin'));
 
 router.route('/user').get(userController.getAllUsers)       
-.post(userController.createUser)
+// .post(userController.createUser)
+router.route('/user/:id').get(userController.getOneUserById)
 router
 .route('/user/:id')
 .patch(userController.updateUser)

@@ -2,26 +2,61 @@ const User = require ('../models/userModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
-exports.getAllUsers = async (req,res,next)=>{
-    res.send('get all user')
-}
-exports.createUser = async (req,res,next)=>{
-    res.send('create one user')
-}
-exports.getOneUser = async (req,res,next)=>{
-    res.send('get one user')
-}
-exports.updateUser = async (req,res,next)=>{
-    res.send('update  one user')
-}
-exports.deleteOneUser = async (req,res,next)=>{
-    res.send('delete  one user')
-}
+exports.getAllUsers = catchAsync( async (req,res,next)=>{
+    const users = await User.find()
+    res.status(200).json({
+        status: 'success',
+        result: users.length,
+        data: {
+            users
+        }
+    })
+})
+// exports.createUser = async (req,res,next)=>{
+//     res.send('create one user')
+// }
+exports.getOneUserById = catchAsync( async (req,res,next)=>{
+    const users = await User.findById(req.params.id);
+    if (!users){
+        return next(new AppError("No User find with that ID",400));
+    }
+    res.status(200).json({
+        status: 'success',
+        data:{
+            users,
+        }
+    })
+})
+exports.updateUser = catchAsync( async (req,res,next)=>{
+    const users = await User.findByIdAndUpdate(req.params.id, req.body,{
+        new: true,
+        runValidators:true,
+    });
+    if(!users){
+        return next(new AppError('No User found with that ID', 400));
+    }
+    res.status(200).json({
+        status: "success",
+        data:{
+            users,
+        },
+    });
+});
+exports.deleteOneUser = catchAsync( async (req,res,next)=>{
+    const users = await User.findByIdAndDelete(req.params.id);
+    if(!users){
+        return next(new AppError('No User found with that ID',404));
+    }
+    res.status(204).json({
+        status: "success",
+        data: null,
+    });
+});
 // allowed field is to restrict what the user can update 
 const filterObj = (obj, ...allowedFields) =>{
     const newObj = {};
     Object.keys(obj).forEach((el)=>{
-        if (allowedFields.include(el)) newObj[el] = obj[el];
+        if (allowedFields.includes(el)) newObj[el] = obj[el];
     });
     return newObj;
 };

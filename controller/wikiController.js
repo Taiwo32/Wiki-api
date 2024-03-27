@@ -38,7 +38,7 @@ exports.createArticle = catchAsync (async (req,res,next)=>{
 });
 
 exports.getOneArticle = catchAsync (async (req,res, next)=>{
-    const article = await Article.findOne({title: req.params.title});
+    const article = await Article.findById({title: req.params.title});
     if(!article){
         return next(new AppError('No article found with that title', 400));
     }
@@ -57,7 +57,7 @@ exports.updateArticle = catchAsync (async (req,res,next)=>{
         runValidators:true,
     });
     if(!article){
-        return next(new AppError('No article found with that ID'));
+        return next(new AppError('No article found with that ID',400));
     }
     res.status(200).json({
         status: "success",
