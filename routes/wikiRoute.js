@@ -5,7 +5,7 @@ const authController = require('../controller/authController')
 const router = express.Router()
 
 router.route('/article')
-.get(authController.protect, authController.restrictTo("user"), wikiController.getAllArticles)
+.get(authController.protect, wikiController.getAllArticles)
 .post(authController.protect, wikiController.createArticle, authController.restrictTo("author"))
 router
 .route('/article/:id')
