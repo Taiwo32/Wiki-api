@@ -2,6 +2,11 @@ const express = require ('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
+// swagger 
+const swaggerUI = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDocument = YAML.load('./swagger.yaml')
+
 const rateLimit = require('express-rate-limit'); // it use to reduce the amount of request a user can make to a certain end point
 const helmet = require('helmet'); // 
 const mongoSanitize = require('express-mongo-sanitize'); // it is used to prevent No SQL injection
@@ -45,12 +50,13 @@ app.use(mongoSanitize());
 
 // routes 
 app.get("/",(req,res)=>{
-    res.send("<h1> Welcome to article api </h1>");
+    res.send("<h1> Welcome to article api </h1> <a href='/api-docs'>Documentation");
 });
 // if you have html file 
 // app.get("/",(req,res)=>{
 //     res.sendFile(__dirname + "/index.html")
 // })
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 app.use('/api/v1/wiki',wikiRouter)
 app.use('/api/v1/user',userRouter)
 

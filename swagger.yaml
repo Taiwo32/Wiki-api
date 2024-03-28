@@ -1,0 +1,443 @@
+openapi: 3.0.0
+info:
+  title: Wiki-API
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://wiki-api-mnbm.onrender.com/api/v1
+  variables: {}
+paths:
+  /wiki/article:
+    get:
+      tags:
+      - Article
+      summary: GET ALL ARTICLES
+      operationId: GETALLARTICLES
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    post:
+      tags:
+      - Article
+      summary: CREATE ARTICLE
+      operationId: CREATEARTICLE
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CREATEARTICLEREQUEST'
+              - example:
+                  title: New-qqqqqqq
+                  content: Lorem Ipsum
+                  author: Light
+            example:
+              title: New-qqqqqqq
+              content: Lorem Ipsum
+              author: Light
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /wiki/article/id:
+    delete:
+      tags:
+      - Article
+      summary: DELETE ARTICLE BY ID
+      operationId: DELETEARTICLEBYID
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    patch:
+      tags:
+      - Article
+      summary: UPDATE ARTICLE BY ID
+      operationId: UPDATEARTICLEBYID
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /wiki/article/wwww:
+    get:
+      tags:
+      - Article
+      summary: GET ARTICLE BY TITLE
+      operationId: GETARTICLEBYTITLE
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /user/user:
+    get:
+      tags:
+      - User
+      summary: Get All Users
+      operationId: GetAllUsers
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /user:
+    get:
+      tags:
+      - User
+      summary: Get One User
+      operationId: GetOneUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /user/id:
+    post:
+      tags:
+      - User
+      summary: Create User
+      operationId: CreateUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    delete:
+      tags:
+      - User
+      summary: Delete User
+      operationId: DeleteUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /user/updateMe:
+    patch:
+      tags:
+      - User
+      summary: Update User
+      operationId: UpdateUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateUserRequest'
+              - example:
+                  fName: jay
+            example:
+              fName: jay
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /user/signup:
+    post:
+      tags:
+      - Authentication
+      summary: SignUp
+      operationId: SignUp
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/SignUpRequest'
+              - example:
+                  fName: cob
+                  lName: terry
+                  userName: cob333
+                  email: cob333@gmail.com
+                  password: cob456
+                  passwordConfirm: cob456
+                  role: admin
+            example:
+              fName: cob
+              lName: terry
+              userName: cob333
+              email: cob333@gmail.com
+              password: cob456
+              passwordConfirm: cob456
+              role: admin
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /user/login:
+    post:
+      tags:
+      - Authentication
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LoginRequest'
+              - example:
+                  email: cob333@gmail.com
+                  password: cob456
+            example:
+              email: cob333@gmail.com
+              password: cob456
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /user/forgetPassword:
+    post:
+      tags:
+      - Authentication
+      summary: Forget Passord
+      operationId: ForgetPassord
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ForgetPassordRequest'
+              - example:
+                  email: omi7234@gmail.com
+            example:
+              email: omi7234@gmail.com
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /user/resetPassword/9d68386b429ca242bebb4d04ab69d5f58b648a10df8d28821cd7b067609414cb:
+    patch:
+      tags:
+      - Authentication
+      summary: Reset Password
+      operationId: ResetPassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ResetPasswordRequest'
+              - example:
+                  password: liketoeat
+                  passwordConfirm: liketoeat
+            example:
+              password: liketoeat
+              passwordConfirm: liketoeat
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /user/updateMyPassword:
+    patch:
+      tags:
+      - Authentication
+      summary: update password
+      operationId: updatepassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/updatepasswordrequest'
+              - example:
+                  passwordCurrent: blanle456
+                  password: wwwwwwww
+                  passwordConfirm: wwwwwwww
+            example:
+              passwordCurrent: blanle456
+              password: wwwwwwww
+              passwordConfirm: wwwwwwww
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    CREATEARTICLEREQUEST:
+      title: CREATEARTICLEREQUEST
+      required:
+      - title
+      - content
+      - author
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+        author:
+          type: string
+      example:
+        title: New-qqqqqqq
+        content: Lorem Ipsum
+        author: Light
+    UpdateUserRequest:
+      title: UpdateUserRequest
+      required:
+      - fName
+      type: object
+      properties:
+        fName:
+          type: string
+      example:
+        fName: jay
+    SignUpRequest:
+      title: SignUpRequest
+      required:
+      - fName
+      - lName
+      - userName
+      - email
+      - password
+      - passwordConfirm
+      - role
+      type: object
+      properties:
+        fName:
+          type: string
+        lName:
+          type: string
+        userName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        passwordConfirm:
+          type: string
+        role:
+          type: string
+      example:
+        fName: cob
+        lName: terry
+        userName: cob333
+        email: cob333@gmail.com
+        password: cob456
+        passwordConfirm: cob456
+        role: admin
+    LoginRequest:
+      title: LoginRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: cob333@gmail.com
+        password: cob456
+    ForgetPassordRequest:
+      title: ForgetPassordRequest
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          type: string
+      example:
+        email: omi7234@gmail.com
+    ResetPasswordRequest:
+      title: ResetPasswordRequest
+      required:
+      - password
+      - passwordConfirm
+      type: object
+      properties:
+        password:
+          type: string
+        passwordConfirm:
+          type: string
+      example:
+        password: liketoeat
+        passwordConfirm: liketoeat
+    updatepasswordrequest:
+      title: updatepasswordrequest
+      required:
+      - passwordCurrent
+      - password
+      - passwordConfirm
+      type: object
+      properties:
+        passwordCurrent:
+          type: string
+        password:
+          type: string
+        passwordConfirm:
+          type: string
+      example:
+        passwordCurrent: blanle456
+        password: wwwwwwww
+        passwordConfirm: wwwwwwww
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Article
+- name: User
+- name: Authentication
