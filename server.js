@@ -8,7 +8,7 @@ mongoose.connect(DB).then(()=>{
     console.log("::Database Connector Established")
 })
 // set up server //
-const port = 3006;
+const port = process.env.PORT || 3006;
 const server = app.listen(port,()=>{
     console.log(`App running on port ${port}...`);
 })
