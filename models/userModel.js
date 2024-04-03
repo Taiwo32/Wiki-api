@@ -1,7 +1,7 @@
 const mongoose = require ('mongoose');
 const validator = require ('validator');
 const bcrypt = require ('bcryptjs');
-const crypto = require('crypto')
+const crypto = require('crypto');
 // const { login } = require('../controller/authController');
 
 const userSchema = new mongoose.Schema({
@@ -110,7 +110,7 @@ userSchema.methods.correctPassword = async function(   // this is called an inst
 userSchema.methods.changedPasswordAfter = function(JWTTimestamp){  //iat in the token
     if(this.passwordChangedAt){
         const changedTimestamp = parseInt( // changes the date to integer
-            this,passwordChangedAt.getTime() / 1000,  // changes the time to microseconds
+            this.passwordChangedAt.getTime() / 1000,  // changes the time to microseconds
          10
         );
         console.log(this.passwordChangedAt, JWTTimestamp);
